@@ -1,25 +1,32 @@
-import axios from 'axios'
-import { useEffect } from 'react'
-import './App.css'
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-function App() {
+type TodoTypes = {
+  id: number,
+  todo: string
+}
+
+export default function Home() {
+
+  const [todos, setTodos] = useState<TodoTypes[]>([])
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000')
+      .get("http://localhost:3000")  // ローカルのバックエンドサーバーのURLにgetメソッドでアクセス
       .then((response) => {
-        console.log(response.data.message);
+        console.log(response.data.todos)
+        const { todos } = response.data
+        setTodos(todos)
       })
-      .catch((e) => {
-        console.log(e.message);
-      });
   }, []);
 
   return (
     <>
-      <div></div>
+      <div>
+        {todos.map((v) =>
+          <p key={v.id}>{v.todo}</p>
+        )}
+      </div>
     </>
   )
 }
-
-export default App
