@@ -1,7 +1,10 @@
 import express, { Application, Request, Response } from "express";
+import cors from 'cors';
 
 const app: Application = express();
 const PORT = 3000;
+
+app.use(cors({ origin: "htpp://localhost:5173" }))
 
 app.get('/', (req: Request, res: Response) => {
     console.log("getリクエストを受け付けました。");
