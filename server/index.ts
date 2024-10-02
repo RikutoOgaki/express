@@ -33,7 +33,22 @@ app.post('/add', (req: Request, res: Response) => {
     const { todo } = req.body.data;
     const uidValue = uid();
     return res.status(200).json({ id: uidValue, todo });
+});
+
+app.delete('/delete', (req: Request, res: Response) => {
+    console.log('deleteリクエストを受け取りました');
+    console.log(req.body.id);
+    return res.status(200).json({ message: 'success' });
+});
+
+app.put('/update', (req: Request, res: Response) => {
+    console.log('putリクエストを受けとりました');
+    console.log(req.body.data);
+    const { id, todo } = req.body.data;
+    return res.status(200).json({ id, todo });
 })
+
+
 
 try {
     app.listen(PORT, () => {
